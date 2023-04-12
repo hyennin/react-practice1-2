@@ -1,20 +1,17 @@
 import Counter from "./Counter";
 import { useState } from "react";
 import Info from "./Info";
+import Timer from "./Timer";
 
 const App = () => {
-  const [visible, setVisible] = useState(false);
+  const [showTimer, setShowTimer] = useState(false);
 
   return (
     <div>
-      <button
-        onClick={() => {
-          setVisible(!visible);
-        }}>
-          {visible ? "숨기기" : "보이기"}
+      {showTimer && <Timer/>}
+      <button onClick={() => setShowTimer(!showTimer)}>
+        Toggle
       </button>
-      <hr/>
-      {visible && <Info/>}
     </div>
   );
 };
