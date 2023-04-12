@@ -5,12 +5,16 @@ const Info = () => {
     const [nickname, setNickname] = useState("");
 
     useEffect(() => {
-        console.log("마운트 될때만 실행합니다.");
+        console.log("effect");
+        return () => {
+            console.log("unmount");
+        }
         }, []);
 
     const onChangeName = (e) => {
     setName(e.target.value);
     };
+
     const onChangeNickname = (e) => {
     setNickname(e.target.value);
     };
@@ -19,8 +23,7 @@ const Info = () => {
         <div>
             <div>
                 <input value={name} onChange={onChangeName} />
-                <input value={nickname}
-                onChange={onChangeNickname} />
+                <input value={nickname} onChange={onChangeNickname} />
             </div>
             <div>
                 <div>
