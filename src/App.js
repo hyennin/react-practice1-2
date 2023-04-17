@@ -5,7 +5,7 @@ import Timer from "./Timer";
 
 const App = () => {
   return (
-    <Counter/>
+    <Info/>
   );
 };
 
