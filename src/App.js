@@ -20,7 +20,9 @@ const App = () => {
   const [hardNumber, setHardNumber] = useState(1);
   const [easyNumber, setEasyNumber] = useState(1);
 
+  // const hardSum = hardCalculate(hardNumber);
   const hardSum = useMemo(() => {
+    // 메모어제이션을 하게 되면 처음 렌더링 할 때만 실행되어 그 값을 메모리에 저장
     return hardCalculate(hardNumber);
   }, [hardNumber]);
 
