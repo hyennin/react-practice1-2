@@ -1,28 +1,29 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 const App = () => {
   const [number, setNumber] = useState(0);
-  const [isKorea, setIsKorea] = useState(true);
 
-  const location = isKorea ? "한국" : "외국";
-  
+  const someFunction = useCallback(() => {
+    console.log(`someFunc : number : ${number}`);
+    return;
+  }, []);
+
   useEffect(() => {
-    console.log('useEffect 호출');
-  }, [location]);
+  console.log("someFunction이 변경되었습니다.");
+  }, [someFunction]);
 
   return (
     <div>
-      <h2>하루 몇 끼 먹어요?</h2>
       <input
         type="number"
         value={number}
-        onChange={(e) => setNumber(e.target.value)}/>
-        <hr/>
-        <h2>어느 나라에 있어요?</h2>
-        <p>나라: {location}</p>
-        <button onClick={() => setIsKorea(!isKorea)}>비행기 타자</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+        onChange={(e) => setNumber(e.target.value)}
+      />
+      <br />
+      <button onClick={someFunction}>Call
+      someFunc</button>
     </div>
-  )
-}
-
-export default App;
+  );
+};
+  
+  export default App;
