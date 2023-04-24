@@ -1,29 +1,43 @@
-import { useEffect, useState, useCallback } from "react";
-
+import React, { useState, useRef } from "react";
 const App = () => {
-  const [number, setNumber] = useState(0);
+  const [renderer, setRenderer] = useState(0);
+  const countRef = useRef(0);
+  let countVar = 0;
+  
+  console.log(countRef);
+  console.log("렌더링");
 
-  const someFunction = useCallback(() => {
-    console.log(`someFunc : number : ${number}`);
-    return;
-  }, [number]);
+  const doRendering = () => {
+    setRenderer(renderer + 1);
+  };
 
-  useEffect(() => {
-  console.log("someFunction이 변경되었습니다.");
-  }, [someFunction]);
+  const increaseCountRef = () => {
+    countRef.current = countRef.current + 1;
+    console.log("Ref : ", countRef.current);
+  };
+
+  const increaseVar = () => {
+    countVar = countVar + 1;
+    console.log("var : ", countVar);
+  };
+
+  const printResult = () => {
+    console.log(`ref : ${countRef.current}, var:
+    ${countVar}`);
+  };
 
   return (
     <div>
-      <input
-        type="number"
-        value={number}
-        onChange={(e) => setNumber(e.target.value)}
-      />
-      <br />
-      <button onClick={someFunction}>Call
-      someFunc</button>
+      <p>Ref: {countRef.current}</p>
+      <p>Var: {countVar}</p>
+      <button onClick={doRendering}>렌더!!</button>
+      <button onClick={increaseCountRef}>Ref증가</button>
+      <button onClick={increaseVar}>Var증가</button>
+      <button onClick={printResult}>Ref Var 값 출력
+      
+      </button>
     </div>
   );
 };
-  
+
   export default App;
