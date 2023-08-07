@@ -1,41 +1,59 @@
-import { useReducer } from "react";
 
-function reducer(state, action) {
-    return {
-        ...state,
-        [action.name] : action.value,
-    }
-}
+// Info.js
+import { useMemo } from "react";
 
-const Info = () => {
-    const [state, dispatch] = useReducer(reducer,
-    {
-        name: '',
-        nickname: '' 
-    });
-
-    const {name, nickname} = state;
-    const onChange = (e) => {
-        dispatch(e.target);
-    }
-
-    return (
-        <div>
-            <div>
-                <input name="name" value={name} onChange={onChange} />
-                <input name="nickname" value={nickname} onChange={onChange} />
-            </div>
-            <div>
-                <div>
-                    <b>이름:</b>
-                    {name}
-                </div>
-                <div>
-                    <b>닉 네임</b>
-                    {nickname}
-                </div>
-            </div>
-        </div>
-    );
+const getColorKor = (color) => {
+  console.log("getColorKor");
+  switch (color) {
+    case "red":
+      return "빨강";
+    case "orange":
+      return "주황";
+    case "yellow":
+      return "노랑";
+    case "green":
+      return "초록";
+    case "blue":
+      return "파랑";
+    case "navy":
+      return "남";
+    case "purple":
+      return "보라";
+    default:
+      return "레인보우";
+  }
 };
+
+const getMovieGenreKor = (movie) => {
+  console.log("getMovieGenreKor");
+  switch (movie) {
+    case "Marriage Story":
+      return "드라마";
+    case "The Fast And The Furious":
+      return "액션";
+    case "Avengers":
+      return "슈퍼히어로";
+    default:
+      return "아직 잘 모름";
+  }
+};
+
+const Info = ({ color, movie }) => {
+  const colorKor = useMemo(() => {
+    return getColorKor(color);
+  }, [color]);
+  const movieGenreKor = useMemo(() => {
+		return getMovieGenreKor(movie);
+  }, [movie]);
+
+  console.log(colorKor, movieGenreKor);
+
+  return (
+    <div className="info-wrapper">
+      제가 가장 좋아하는 색은 {colorKor} 이고, <br />
+      즐겨보는 영화 장르는 {movieGenreKor} 입니다.
+    </div>
+  );
+};
+
 export default Info;
